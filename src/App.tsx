@@ -1,12 +1,25 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import useMousePosition from './hooks/useMousePosition';
 import LikeButton from './components/LikeButton';
+import withLoader from './components/withLoader';
+
+interface IShowResult {
+  message: string;
+  status: string;
+}
+const DogShow: React.FC<{data: IShowResult}> = ({data}) =>{
+  return (
+    <>
+      <h2>Dog show: {data.status}</h2>
+      <img src={data.message}/>
+    </>
+  )
+}
 
 function App() {
   const [ show, setShow ] = useState(true);
-  const positions = useMousePosition();
+  const WrappedDogShow = withLoader(DogShow, 'https://dog.ceo/api/breeds/image/random')
   return (
     <div className="App">
       <header className="App-header">
@@ -14,8 +27,8 @@ function App() {
         <p>
           <button onClick={()=>{setShow(!show)}}>Toggle Tracker</button>
         </p>
+        <WrappedDogShow/>
         <LikeButton/>
-        <p>X: {positions.x} Y: {positions.y}</p>
         <a
           className="App-link"
           href="https://reactjs.org"
