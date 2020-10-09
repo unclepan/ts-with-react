@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-// import LikeButton from './components/LikeButton';
-import MouseTrackers from './components/MouseTracker';
+import useMousePosition from './hooks/useMousePosition';
+import LikeButton from './components/LikeButton';
 
 function App() {
   const [ show, setShow ] = useState(true);
+  const positions = useMousePosition();
   return (
     <div className="App">
       <header className="App-header">
@@ -13,8 +14,8 @@ function App() {
         <p>
           <button onClick={()=>{setShow(!show)}}>Toggle Tracker</button>
         </p>
-        { show && <MouseTrackers /> }
-        {/* <LikeButton /> */}
+        <LikeButton/>
+        <p>X: {positions.x} Y: {positions.y}</p>
         <a
           className="App-link"
           href="https://reactjs.org"
