@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import LikeButton from './components/LikeButton';
-import useURLLoader from './hooks/useURLLoader'
+// import useURLLoader from './hooks/useURLLoader'
 
 interface IShowResult {
   message: string;
@@ -10,8 +10,8 @@ interface IShowResult {
 }
 function App() {
   const [ show, setShow ] = useState(true);
-  const [data, loading] = useURLLoader('https://dog.ceo/api/breeds/image/random', [show]);
-  const dogResult = data as IShowResult;
+  // const [data, loading] = useURLLoader('https://dog.ceo/api/breeds/image/random', [show]);
+  // const dogResult = data as IShowResult;
   return (
     <div className="App">
       <header className="App-header">
@@ -19,8 +19,8 @@ function App() {
         <p>
           <button onClick={()=>{setShow(!show)}}>Refresh dog photo</button>
         </p>
-        { loading ? <p>狗狗读取中</p>
-        :<img src={dogResult && dogResult.message}/> }
+        {/* { loading ? <p>狗狗读取中</p>
+        :<img src={dogResult && dogResult.message}/> } */}
         <LikeButton/>
         <a
           className="App-link"
