@@ -4,12 +4,19 @@
 
 // 访问dom节点，useRef返回的值传递给组件，或者dom的ref属性，就可以通过ref的current值 访问组件或者真实的dom节点，从而可以对dom进行一些操作
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { ThemeContext } from '../App';
+
 const LikeButton: React.FC = () => {
   const [like, setLike] = useState(0);
   const likeRef = useRef(0);
   const didMountRef = useRef(false);
   const domRef = useRef<HTMLInputElement>(null);
+  const theme = useContext(ThemeContext);
+  const style = {
+    background: theme.background,
+    color: theme.color
+  }
   useEffect(() => {
     console.log('document title effect is running');
     document.title = `点击了${like }次`
@@ -37,7 +44,7 @@ const LikeButton: React.FC = () => {
   return (
     <>
       <input type="text" ref={domRef}/>
-      <button onClick={()=>{setLike(like + 1); likeRef.current++}}>
+      <button style={style} onClick={()=>{setLike(like + 1); likeRef.current++}}>
         {like} 👍
       </button>
       <button onClick={handleAlertClick}> Alert!
